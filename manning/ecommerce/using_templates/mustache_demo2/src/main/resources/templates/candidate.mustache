@@ -1,0 +1,14 @@
+{{>header}}
+<h1>Mustache with Spring Boot</h1>
+<div>
+    <b>Candidate List</b>
+</div>
+{{#candidateList}}
+    <b> Name: </b>{{name}}
+    <b> Age: </b>{{age}}
+    <b> Phone Number: </b>{{phoneNo}}
+    <b> Email ID: </b>{{emailId}}
+    <br>
+    <hr>
+{{/candidateList}}
+{{>footer}}
