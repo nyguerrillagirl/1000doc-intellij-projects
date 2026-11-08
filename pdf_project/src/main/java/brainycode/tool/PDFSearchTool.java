@@ -51,14 +51,14 @@ public class PDFSearchTool {
 
     private void findSearchString(String filePath, String searchString) {
         List<Path> matches = new ArrayList<>();
-
+        Path root =  Paths.get(filePath);
         try (var paths = Files.walk(Paths.get(filePath))) {
             paths.filter(Files::isRegularFile)
                     .filter(p -> p.toString().toLowerCase().endsWith(".pdf"))
                     .forEach(pdfFile -> {
                        if (containsText(pdfFile, searchString)) {
                            System.out.print(".");
-                           matches.add(pdfFile);
+                           matches.add(root.relativize(pdfFile));
                        }
                     });
 
@@ -66,7 +66,7 @@ public class PDFSearchTool {
             System.out.println("Matches:");
             System.out.println("--------");
             for (Path pdfFile : matches) {
-                System.out.println(pdfFile.getFileName());
+                System.out.println(pdfFile);
             }
         } catch  (IOException e) {
             e.printStackTrace();
